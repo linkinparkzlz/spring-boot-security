@@ -7,8 +7,7 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class WebSecurityConfiguration   extends WebSecurityConfigurerAdapter{
-
+public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
     @Override
@@ -23,5 +22,11 @@ public class WebSecurityConfiguration   extends WebSecurityConfigurerAdapter{
                     }
                 }
         );
+
+
+        //  CSP
+        http.headers().contentSecurityPolicy("script-src https://code.jquery.com/");
+
+
     }
 }
