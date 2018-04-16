@@ -18,7 +18,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                     @Override
                     public boolean matches(HttpServletRequest httpServletRequest) {
                         return httpServletRequest.getMethod().equals("POST");
-                        //&& httpServletRequest.getRequestURI().startsWith("/login");
+                        //&& httpServletRequest.getRequestURI(  ).startsWith("/login");
                     }
                 }
         );
@@ -30,6 +30,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         //X-Frame-Options header
         http.headers().frameOptions().sameOrigin();
+
+        // XSS header
+        http.headers().xssProtection().block(true);
+
 
     }
 }
