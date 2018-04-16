@@ -1,5 +1,6 @@
 package com.example.springbootsecurity.security;
 
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
@@ -35,5 +36,23 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.headers().xssProtection().block(true);
 
 
+        //授权
+
+        http.authorizeRequests().anyRequest().fullyAuthenticated().and().formLogin()
+                .loginPage("/login").failureForwardUrl("/error").permitAll()
+                .and().logout().permitAll();
+
     }
+
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
+
+
+        authenticationManagerBuilder.inMemoryAuthentication().withUser("zzz").password("123456").roles("ADMIN", "USER")
+                .and().withUser("lll").password("123456").roles("ADMIN");
+
+
+    }
+
 }
