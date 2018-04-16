@@ -28,5 +28,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.headers().contentSecurityPolicy("script-src https://code.jquery.com/");
 
 
+        //X-Frame-Options header
+        http.headers().frameOptions().sameOrigin();
+
     }
 }
